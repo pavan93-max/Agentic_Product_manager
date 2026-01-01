@@ -1,0 +1,84 @@
+idea_generation_task:
+  description: >
+    Analyze historical experiment outcomes, KPI trends, and known
+    product constraints to propose ONE high-impact product change
+    that can be validated through controlled experimentation.
+
+    Focus on identifying leverage points in the user funnel
+    (e.g., discovery, engagement, conversion) rather than vague
+    or cosmetic improvements.
+  expected_output: >
+    A single, clearly articulated product idea describing:
+    - What component or behavior will change
+    - Why this change is expected to improve a specific KPI
+    - Which KPI is targeted
+  agent: idea_agent
+
+
+hypothesis_formulation_task:
+  description: >
+    Convert the proposed product idea into a precise, testable
+    causal hypothesis suitable for an A/B experiment.
+
+    The hypothesis must explicitly define the causal relationship
+    between the treatment and the primary metric, including
+    expected direction and approximate magnitude of effect.
+  expected_output: >
+    A structured hypothesis containing:
+    - Primary metric name
+    - Expected direction of change (increase/decrease)
+    - Expected relative lift (approximate percentage)
+    - Brief causal explanation
+  agent: hypothesis_agent
+
+
+experiment_design_task:
+  description: >
+    Design a statistically valid and operationally feasible
+    A/B experiment to test the given hypothesis.
+
+    Ensure that the experiment minimizes bias, avoids metric
+    contamination, and includes sufficient power to detect
+    the expected effect size.
+  expected_output: >
+    A JSON-like experiment specification including:
+    - Control variant definition
+    - Treatment variant definition
+    - Traffic allocation percentage
+    - Sample size per variant
+    - Primary evaluation metric
+    - At least one guardrail metric
+  agent: design_agent
+
+
+experiment_evaluation_task:
+  description: >
+    Interpret the experimental results using Bayesian inference.
+    Quantify uncertainty, estimate posterior distributions,
+    and compute the probability that the treatment outperforms
+    the control.
+
+    Focus on probabilistic conclusions rather than binary
+    significance testing.
+  expected_output: >
+    A Bayesian evaluation summary including:
+    - Posterior mean lift
+    - 95% credible interval
+    - Probability that treatment > control
+    - Plain-language interpretation of uncertainty
+  agent: evaluation_agent
+
+
+decision_making_task:
+  description: >
+    Make an autonomous product decision based on Bayesian evidence,
+    predefined probability thresholds, and long-term KPI impact.
+
+    Consider the cost of false positives, false negatives,
+    and additional iteration when making the final decision.
+  expected_output: >
+    A final decision including:
+    - Decision label (SHIP / ROLLBACK / ITERATE)
+    - Evidence-based justification
+    - Recommended next action or follow-up experiment
+  agent: decision_agent

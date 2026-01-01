@@ -1,0 +1,50 @@
+{
+  "experiments": [
+    {
+      "experiment": {
+        "control": {
+          "name": "Generic_Onboarding",
+          "description": "Existing onboarding flow with generic content and feature highlights not personalized to user behavior or profile."
+        },
+        "treatment": {
+          "name": "Personalized_Onboarding",
+          "description": "Onboarding flow wizard that adapts onboarding content and feature highlights based on early user behavior signals and profile inputs."
+        },
+        "sample_size": 4000,
+        "metric": "binary_engagement_metric"
+      },
+      "bayesian_result": {
+        "lift_mean": 0.0004997501249375397,
+        "prob_treatment_better": 0.5402,
+        "ci_95": [
+          -0.011418940353570946,
+          0.012723414184237723
+        ]
+      },
+      "decision": "ROLLBACK"
+    },
+    {
+      "experiment": {
+        "control": {
+          "name": "Generic_Onboarding",
+          "description": "Current one-size-fits-all onboarding tutorial presented immediately after sign-up."
+        },
+        "treatment": {
+          "name": "Adaptive_Onboarding",
+          "description": "Streamlined onboarding flow dynamically tailored based on quick user preference inputs collected right after sign-up, showing relevant features and tips."
+        },
+        "sample_size": 4000,
+        "metric": "PostSignUp_OnboardingCompletionRate"
+      },
+      "bayesian_result": {
+        "lift_mean": 0.0002498750624687768,
+        "prob_treatment_better": 0.5148,
+        "ci_95": [
+          -0.011563996486556092,
+          0.012109568940814974
+        ]
+      },
+      "decision": "ROLLBACK"
+    }
+  ]
+}
